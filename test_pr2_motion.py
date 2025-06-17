@@ -123,12 +123,11 @@ def main(use_pr2_drake=True):
     table_path = "models/table_collision/table.urdf"
     turtlebot_path = "models/turtlebot/turtlebot.urdf"
     table = load_pybullet(table_path, fixed_base=True)
-    turtlebot = load_pybullet(turtlebot_path)
+    turtlebot = p.loadURDF(turtlebot_path, basePosition=[1,1,0])
 
     set_quat(table, quat_from_euler(Euler(yaw=PI/2)))
     # table/table.urdf, table_square/table_square.urdf, cube.urdf, block.urdf, door.urdf
 
-    set_quat(turtlebot, quat_from_euler(Euler(roll=PI/2)))
     obstacles = [plane, table, turtlebot]
 
     pr2_urdf = DRAKE_PR2_URDF if use_pr2_drake else PR2_URDF
