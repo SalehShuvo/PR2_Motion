@@ -123,7 +123,7 @@ def main(use_pr2_drake=True):
     table_path = "models/table_collision/table.urdf"
     turtlebot_path = "models/turtlebot/turtlebot.urdf"
     table = load_pybullet(table_path, fixed_base=True)
-    turtlebot = p.loadURDF(turtlebot_path, basePosition=[1,1,0])
+    turtlebot = load_pybullet(turtlebot_path)
 
     set_quat(table, quat_from_euler(Euler(yaw=PI/2)))
     # table/table.urdf, table_square/table_square.urdf, cube.urdf, block.urdf, door.urdf
@@ -141,6 +141,8 @@ def main(use_pr2_drake=True):
     print(z)
 
     set_point(pr2, Point(z=z))
+    set_point(turtlebot, Point(1,1,0))
+
     print(get_aabb(pr2))
     wait_if_gui()
 
